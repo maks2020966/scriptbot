@@ -8,11 +8,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -22,20 +18,13 @@
             overflow-x: hidden;
         }
 
-        /* ===== КАПЧА ===== */
-
         #captchaScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
             background: #0a0a0f;
             z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
             padding: 30px;
         }
 
@@ -49,68 +38,40 @@
         }
 
         .captcha-title {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 8px;
+            font-size: 28px; font-weight: 800; margin-bottom: 8px;
             background: linear-gradient(135deg, #7c3aed, #a78bfa, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: fadeInUp 0.6s ease;
         }
 
         .captcha-subtitle {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 30px;
+            font-size: 15px; color: #666; margin-bottom: 30px;
             animation: fadeInUp 0.6s ease 0.1s both;
         }
 
         .captcha-question {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            color: #ccc;
+            font-size: 18px; font-weight: 600; margin-bottom: 25px; color: #ccc;
             animation: fadeInUp 0.6s ease 0.2s both;
         }
 
         .captcha-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            max-width: 300px;
-            width: 100%;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 12px; max-width: 300px; width: 100%;
             animation: fadeInUp 0.6s ease 0.3s both;
         }
 
         .captcha-item {
-            background: #161622;
-            border: 2px solid #1e1e30;
-            border-radius: 16px;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+            background: #161622; border: 2px solid #1e1e30;
+            border-radius: 16px; padding: 18px;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 8px;
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
             -webkit-tap-highlight-color: transparent;
         }
 
-        .captcha-item:active {
-            transform: scale(0.92);
-        }
-
-        .captcha-item.wrong {
-            animation: shake 0.5s ease;
-            border-color: #ef4444;
-            background: rgba(239, 68, 68, 0.1);
-        }
-
-        .captcha-item.correct {
-            border-color: #22c55e;
-            background: rgba(34, 197, 94, 0.1);
-            animation: correctPulse 0.5s ease;
-        }
+        .captcha-item:active { transform: scale(0.92); }
+        .captcha-item.wrong { animation: shake 0.5s ease; border-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .captcha-item.correct { border-color: #22c55e; background: rgba(34, 197, 94, 0.1); animation: correctPulse 0.5s ease; }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
@@ -126,28 +87,11 @@
             100% { transform: scale(1); }
         }
 
-        .captcha-icon {
-            width: 40px;
-            height: 40px;
-        }
+        .captcha-icon { width: 40px; height: 40px; }
+        .captcha-label { font-size: 12px; color: #888; font-weight: 500; }
 
-        .captcha-label {
-            font-size: 12px;
-            color: #888;
-            font-weight: 500;
-        }
-
-        /* ===== ГОЛОВНИЙ ЕКРАН ===== */
-
-        #mainScreen {
-            display: none;
-            opacity: 0;
-        }
-
-        #mainScreen.show {
-            display: block;
-            animation: mainIn 0.8s cubic-bezier(0.4, 0, 0, 1) forwards;
-        }
+        #mainScreen { display: none; opacity: 0; }
+        #mainScreen.show { display: block; animation: mainIn 0.8s cubic-bezier(0.4, 0, 0, 1) forwards; }
 
         @keyframes mainIn {
             0% { opacity: 0; transform: translateY(30px); }
@@ -169,32 +113,13 @@
             50% { transform: translateY(-8px); }
         }
 
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.6); }
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         @keyframes scaleIn {
             0% { opacity: 0; transform: scale(0.8); }
             100% { opacity: 1; transform: scale(1); }
         }
 
-        @keyframes ripple {
-            to { transform: scale(4); opacity: 0; }
-        }
-
-        /* ===== HEADER ===== */
-
         .header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: sticky; top: 0; z-index: 100;
             background: rgba(10, 10, 15, 0.8);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -202,573 +127,257 @@
             padding: 16px 20px;
         }
 
-        .header-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .header-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .header-logo svg {
-            width: 32px;
-            height: 32px;
-            animation: float 3s ease-in-out infinite;
-        }
+        .header-top { display: flex; align-items: center; justify-content: space-between; }
+        .header-logo { display: flex; align-items: center; gap: 10px; }
+        .header-logo svg { width: 32px; height: 32px; animation: float 3s ease-in-out infinite; }
 
         .header-logo h1 {
-            font-size: 20px;
-            font-weight: 800;
+            font-size: 20px; font-weight: 800;
             background: linear-gradient(135deg, #7c3aed, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .header-badge {
             background: linear-gradient(135deg, #7c3aed, #a78bfa);
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
-            letter-spacing: 1px;
+            color: white; font-size: 10px; font-weight: 700;
+            padding: 4px 10px; border-radius: 20px; letter-spacing: 1px;
         }
 
-        /* ===== TABS ===== */
-
         .tabs {
-            display: flex;
-            background: rgba(10, 10, 15, 0.9);
+            display: flex; background: rgba(10, 10, 15, 0.9);
             backdrop-filter: blur(20px);
-            position: sticky;
-            top: 65px;
-            z-index: 99;
-            padding: 8px;
-            gap: 4px;
+            position: sticky; top: 65px; z-index: 99;
+            padding: 8px; gap: 4px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .tab {
-            flex: 1;
-            padding: 10px 4px;
-            text-align: center;
-            font-size: 10px;
-            font-weight: 600;
-            color: #555;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+            flex: 1; padding: 10px 4px; text-align: center;
+            font-size: 10px; font-weight: 600; color: #555;
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
             border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 4px;
             -webkit-tap-highlight-color: transparent;
-            position: relative;
-            overflow: hidden;
         }
 
-        .tab.active {
-            color: #a78bfa;
-            background: rgba(124, 58, 237, 0.15);
-        }
+        .tab.active { color: #a78bfa; background: rgba(124, 58, 237, 0.15); }
+        .tab:active { transform: scale(0.95); }
+        .tab svg { width: 22px; height: 22px; transition: all 0.3s; }
+        .tab.active svg { filter: drop-shadow(0 0 6px rgba(167, 139, 250, 0.5)); }
 
-        .tab:active {
-            transform: scale(0.95);
-        }
+        .content { padding: 15px; padding-bottom: 100px; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0, 1); }
 
-        .tab svg {
-            width: 22px;
-            height: 22px;
-            transition: all 0.3s;
-        }
-
-        .tab.active svg {
-            filter: drop-shadow(0 0 6px rgba(167, 139, 250, 0.5));
-        }
-
-        /* ===== CONTENT ===== */
-
-        .content {
-            padding: 15px;
-            padding-bottom: 100px;
-        }
-
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-            animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0, 1);
-        }
-
-        /* ===== SEARCH ===== */
-
-        .search-container {
-            position: relative;
-            margin-bottom: 20px;
-        }
+        .search-container { position: relative; margin-bottom: 20px; }
 
         .search-box {
-            width: 100%;
-            padding: 14px 14px 14px 48px;
-            background: #161622;
-            border: 1px solid #1e1e30;
-            border-radius: 16px;
-            color: #eee;
-            font-size: 15px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: all 0.3s;
+            width: 100%; padding: 14px 14px 14px 48px;
+            background: #161622; border: 1px solid #1e1e30;
+            border-radius: 16px; color: #eee;
+            font-size: 15px; font-family: 'Inter', sans-serif;
+            outline: none; transition: all 0.3s;
         }
 
-        .search-box:focus {
-            border-color: #7c3aed;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
-        }
+        .search-box:focus { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15); }
 
         .search-icon {
-            position: absolute;
-            left: 16px;
-            top: 50%;
+            position: absolute; left: 16px; top: 50%;
             transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            color: #555;
+            width: 20px; height: 20px; color: #555;
         }
 
-        /* ===== CARDS ===== */
-
         .card {
-            background: #161622;
-            border-radius: 20px;
-            padding: 18px;
-            margin-bottom: 12px;
+            background: #161622; border-radius: 20px;
+            padding: 18px; margin-bottom: 12px;
             border: 1px solid #1e1e30;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
             -webkit-tap-highlight-color: transparent;
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #7c3aed, #a78bfa, #c084fc);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
+        .card:active { transform: scale(0.98); }
 
-        .card:active {
-            transform: scale(0.98);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
+        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
 
         .card-icon {
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(167, 139, 250, 0.1));
             border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
         }
 
-        .card-icon svg {
-            width: 24px;
-            height: 24px;
-            color: #a78bfa;
-        }
+        .card-icon svg { width: 24px; height: 24px; color: #a78bfa; }
 
-        .card-info {
-            flex: 1;
-        }
-
-        .card-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 2px;
-        }
-
-        .card-desc {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .card-arrow {
-            width: 20px;
-            height: 20px;
-            color: #444;
-        }
+        .card-info { flex: 1; min-width: 0; }
+        .card-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 2px; word-break: break-word; }
+        .card-desc { font-size: 12px; color: #666; }
+        .card-arrow { width: 20px; height: 20px; color: #444; flex-shrink: 0; }
 
         .card-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: rgba(124, 58, 237, 0.15);
-            color: #a78bfa;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-top: 8px;
+            display: inline-flex; align-items: center; gap: 4px;
+            background: rgba(124, 58, 237, 0.15); color: #a78bfa;
+            padding: 4px 12px; border-radius: 20px;
+            font-size: 11px; font-weight: 600; margin-top: 8px;
         }
 
-        /* ===== SCRIPT VIEW ===== */
-
-        .script-view {
-            animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0, 1);
-        }
+        .script-view { animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0, 1); }
 
         .script-code {
-            background: #0d0d18;
-            border-radius: 16px;
-            padding: 16px;
+            background: #0d0d18; border-radius: 16px; padding: 16px;
             font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
-            font-size: 13px;
-            color: #a78bfa;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-break: break-all;
-            margin: 12px 0;
-            border: 1px solid #1e1e30;
-            line-height: 1.6;
-            max-height: 300px;
-            overflow-y: auto;
+            font-size: 13px; color: #a78bfa;
+            overflow-x: auto; white-space: pre-wrap; word-break: break-all;
+            margin: 12px 0; border: 1px solid #1e1e30;
+            line-height: 1.6; max-height: 300px; overflow-y: auto;
         }
-
-        /* ===== BUTTONS ===== */
 
         .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 16px;
-            font-size: 15px;
-            font-weight: 700;
+            width: 100%; padding: 14px; border: none;
+            border-radius: 16px; font-size: 15px; font-weight: 700;
             font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0, 1);
             margin-top: 8px;
             -webkit-tap-highlight-color: transparent;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        .btn:active {
-            transform: scale(0.97);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #7c3aed, #a855f7);
-            color: white;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
-        }
-
-        .btn-secondary {
-            background: #1e1e30;
-            color: #a78bfa;
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #059669, #10b981);
-            color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #dc2626, #ef4444);
-            color: white;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-        }
-
-        /* ===== BACK BUTTON ===== */
+        .btn:active { transform: scale(0.97); }
+        .btn-primary { background: linear-gradient(135deg, #7c3aed, #a855f7); color: white; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3); }
+        .btn-secondary { background: #1e1e30; color: #a78bfa; }
+        .btn-success { background: linear-gradient(135deg, #059669, #10b981); color: white; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+        .btn-danger { background: linear-gradient(135deg, #dc2626, #ef4444); color: white; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
 
         .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: none;
-            border: none;
-            color: #a78bfa;
-            font-size: 14px;
-            font-weight: 600;
+            display: inline-flex; align-items: center; gap: 6px;
+            background: none; border: none; color: #a78bfa;
+            font-size: 14px; font-weight: 600;
             font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            padding: 8px 0;
-            margin-bottom: 12px;
+            cursor: pointer; padding: 8px 0; margin-bottom: 12px;
             -webkit-tap-highlight-color: transparent;
         }
 
-        .back-btn svg {
-            width: 18px;
-            height: 18px;
-        }
+        .back-btn svg { width: 18px; height: 18px; }
 
-        /* ===== EMPTY STATE ===== */
-
-        .empty {
-            text-align: center;
-            padding: 60px 20px;
-        }
+        .empty { text-align: center; padding: 60px 20px; }
 
         .empty-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            background: rgba(124, 58, 237, 0.1);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 80px; height: 80px; margin: 0 auto 20px;
+            background: rgba(124, 58, 237, 0.1); border-radius: 24px;
+            display: flex; align-items: center; justify-content: center;
             animation: float 3s ease-in-out infinite;
         }
 
-        .empty-icon svg {
-            width: 40px;
-            height: 40px;
-            color: #7c3aed;
-        }
-
-        .empty h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #ccc;
-            margin-bottom: 6px;
-        }
-
-        .empty p {
-            font-size: 13px;
-            color: #555;
-        }
-
-        /* ===== CHEAT ITEMS ===== */
+        .empty-icon svg { width: 40px; height: 40px; color: #7c3aed; }
+        .empty h3 { font-size: 18px; font-weight: 700; color: #ccc; margin-bottom: 6px; }
+        .empty p { font-size: 13px; color: #555; }
 
         .cheat-item {
-            background: #161622;
-            border-radius: 20px;
-            padding: 16px 18px;
-            margin-bottom: 12px;
+            background: #161622; border-radius: 20px;
+            padding: 16px 18px; margin-bottom: 12px;
             border: 1px solid #1e1e30;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: flex; justify-content: space-between; align-items: center;
             animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0, 1) both;
         }
 
-        .cheat-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .cheat-left { display: flex; align-items: center; gap: 12px; }
 
         .cheat-icon {
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1));
             border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .cheat-icon svg {
-            width: 24px;
-            height: 24px;
-            color: #10b981;
-        }
-
-        .cheat-name {
-            font-size: 15px;
-            font-weight: 700;
-        }
+        .cheat-icon svg { width: 24px; height: 24px; color: #10b981; }
+        .cheat-name { font-size: 15px; font-weight: 700; }
 
         .cheat-btn {
             background: linear-gradient(135deg, #059669, #10b981);
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 700;
+            color: white; border: none;
+            padding: 10px 18px; border-radius: 12px;
+            cursor: pointer; font-size: 13px; font-weight: 700;
             font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
             transition: all 0.3s;
         }
 
-        .cheat-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* ===== ADMIN ===== */
+        .cheat-btn:active { transform: scale(0.95); }
 
         .admin-section-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #a78bfa;
+            font-size: 14px; font-weight: 700; color: #a78bfa;
             margin: 24px 0 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            display: flex; align-items: center; gap: 8px;
         }
 
-        .admin-section-title svg {
-            width: 18px;
-            height: 18px;
-        }
+        .admin-section-title svg { width: 18px; height: 18px; }
 
         .admin-input {
-            width: 100%;
-            padding: 14px 16px;
-            background: #161622;
-            border: 1px solid #1e1e30;
-            border-radius: 14px;
-            color: #eee;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            margin-bottom: 8px;
-            outline: none;
-            transition: all 0.3s;
+            width: 100%; padding: 14px 16px;
+            background: #161622; border: 1px solid #1e1e30;
+            border-radius: 14px; color: #eee;
+            font-size: 14px; font-family: 'Inter', sans-serif;
+            margin-bottom: 8px; outline: none; transition: all 0.3s;
         }
 
-        .admin-input:focus {
-            border-color: #7c3aed;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
-        }
+        .admin-input:focus { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1); }
 
         .admin-textarea {
-            width: 100%;
-            padding: 14px 16px;
-            background: #161622;
-            border: 1px solid #1e1e30;
-            border-radius: 14px;
-            color: #eee;
-            font-size: 14px;
-            font-family: 'SF Mono', monospace;
-            margin-bottom: 8px;
-            outline: none;
-            min-height: 120px;
-            resize: vertical;
-            transition: all 0.3s;
+            width: 100%; padding: 14px 16px;
+            background: #161622; border: 1px solid #1e1e30;
+            border-radius: 14px; color: #eee;
+            font-size: 14px; font-family: 'SF Mono', monospace;
+            margin-bottom: 8px; outline: none;
+            min-height: 120px; resize: vertical; transition: all 0.3s;
         }
 
-        .admin-textarea:focus {
-            border-color: #7c3aed;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
-        }
+        .admin-textarea:focus { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1); }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
 
         .stat-card {
-            background: #161622;
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
+            background: #161622; border-radius: 20px;
+            padding: 20px; text-align: center;
             border: 1px solid #1e1e30;
             animation: scaleIn 0.5s cubic-bezier(0.4, 0, 0, 1) both;
         }
 
-        .stat-card:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
         .stat-number {
-            font-size: 32px;
-            font-weight: 900;
+            font-size: 32px; font-weight: 900;
             background: linear-gradient(135deg, #7c3aed, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .stat-label {
-            font-size: 11px;
-            color: #666;
-            font-weight: 600;
-            margin-top: 4px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .stat-label { font-size: 11px; color: #666; font-weight: 600; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
         .list-item {
-            background: #161622;
-            border-radius: 14px;
-            padding: 12px 16px;
-            margin-bottom: 8px;
+            background: #161622; border-radius: 14px;
+            padding: 12px 16px; margin-bottom: 8px;
             border: 1px solid #1e1e30;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: flex; justify-content: space-between; align-items: center;
             animation: fadeInUp 0.4s ease both;
         }
 
-        .list-item-name {
-            font-size: 14px;
-            font-weight: 600;
-        }
+        .list-item-name { font-size: 14px; font-weight: 600; }
 
         .delete-btn {
-            background: rgba(239, 68, 68, 0.15);
-            color: #ef4444;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            transition: all 0.3s;
+            background: rgba(239, 68, 68, 0.15); color: #ef4444; border: none;
+            padding: 8px 14px; border-radius: 10px; cursor: pointer;
+            font-size: 12px; font-weight: 700; font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent; transition: all 0.3s;
         }
 
-        .delete-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* ===== NOTIFICATION ===== */
+        .delete-btn:active { transform: scale(0.95); }
 
         .notification {
-            position: fixed;
-            top: -60px;
-            left: 50%;
+            position: fixed; top: -60px; left: 50%;
             transform: translateX(-50%);
-            background: #161622;
-            border: 1px solid #1e1e30;
-            color: white;
-            padding: 14px 24px;
-            border-radius: 16px;
-            font-size: 14px;
-            font-weight: 600;
+            background: #161622; border: 1px solid #1e1e30; color: white;
+            padding: 14px 24px; border-radius: 16px;
+            font-size: 14px; font-weight: 600;
             z-index: 10001;
             transition: top 0.5s cubic-bezier(0.4, 0, 0, 1);
             backdrop-filter: blur(20px);
@@ -776,60 +385,33 @@
             white-space: nowrap;
         }
 
-        .notification.show {
-            top: 20px;
-        }
-
-        /* ===== GUIDE CARD ===== */
+        .notification.show { top: 20px; }
 
         .guide-card {
-            background: #161622;
-            border-radius: 20px;
-            padding: 18px;
-            margin-bottom: 12px;
+            background: #161622; border-radius: 20px;
+            padding: 18px; margin-bottom: 12px;
             border: 1px solid #1e1e30;
             text-align: center;
             animation: fadeInUp 0.5s ease both;
         }
 
-        .guide-card-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
+        .guide-card-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .guide-card-desc { font-size: 13px; color: #666; }
 
-        .guide-card-desc {
-            font-size: 13px;
-            color: #666;
-        }
-
-        /* ===== SCROLLBAR ===== */
-
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #2a2a4a;
-            border-radius: 10px;
-        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #2a2a4a; border-radius: 10px; }
     </style>
 </head>
 <body>
 
-<!-- КАПЧА -->
 <div id="captchaScreen">
     <div class="captcha-title">Добро пожаловать!</div>
     <div class="captcha-subtitle">Пройдите проверку</div>
-    <div class="captcha-question" id="captchaQuestion">Где кошка? 🐱</div>
+    <div class="captcha-question">Где кошка? 🐱</div>
     <div class="captcha-grid" id="captchaGrid"></div>
 </div>
 
-<!-- ГОЛОВНИЙ ЕКРАН -->
 <div id="mainScreen">
 
     <div class="header">
@@ -853,37 +435,24 @@
     </div>
 
     <div class="tabs">
-        <div class="tab active" onclick="showTab('scripts', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-            </svg>
+        <div class="tab active" data-tab="scripts">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             Скрипты
         </div>
-        <div class="tab" onclick="showTab('my', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-            </svg>
+        <div class="tab" data-tab="my">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
             Мои
         </div>
-        <div class="tab" onclick="showTab('cheats', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <rect x="2" y="6" width="20" height="12" rx="2"/>
-                <path d="M12 12h.01"/><path d="M17 12h.01"/>
-                <path d="M7 12h.01"/>
-            </svg>
+        <div class="tab" data-tab="cheats">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
             Читы
         </div>
-        <div class="tab" onclick="showTab('guides', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <polygon points="5 3 19 12 5 21 5 3"/>
-            </svg>
+        <div class="tab" data-tab="guides">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             Гайды
         </div>
-        <div class="tab" id="adminTab" style="display:none" onclick="showTab('admin', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-            </svg>
+        <div class="tab" id="adminTab" data-tab="admin" style="display:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
             Админ
         </div>
     </div>
@@ -891,81 +460,41 @@
     <div class="content">
         <div class="section active" id="scripts">
             <div class="search-container">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-                </svg>
-                <input class="search-box" id="searchInput" placeholder="Найти скрипт..." oninput="searchScripts()">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input class="search-box" id="searchInput" placeholder="Найти скрипт...">
             </div>
             <div id="scriptsList"></div>
         </div>
 
-        <div class="section" id="my">
-            <div id="myScriptsList"></div>
-        </div>
-
-        <div class="section" id="cheats">
-            <div id="cheatsList"></div>
-        </div>
-
-        <div class="section" id="guides">
-            <div id="guidesList"></div>
-        </div>
+        <div class="section" id="my"><div id="myScriptsList"></div></div>
+        <div class="section" id="cheats"><div id="cheatsList"></div></div>
+        <div class="section" id="guides"><div id="guidesList"></div></div>
 
         <div class="section" id="admin">
             <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalUsers">0</div>
-                    <div class="stat-label">Юзеры</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalScripts">0</div>
-                    <div class="stat-label">Скрипты</div>
-                </div>
+                <div class="stat-card"><div class="stat-number" id="totalUsers">0</div><div class="stat-label">Юзеры</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalScripts">0</div><div class="stat-label">Скрипты</div></div>
             </div>
 
-            <div class="admin-section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-                Добавить скрипт
-            </div>
+            <div class="admin-section-title">➕ Добавить скрипт</div>
             <input class="admin-input" id="addGameName" placeholder="Название игры">
             <textarea class="admin-textarea" id="addScriptText" placeholder="Текст скрипта"></textarea>
-            <button class="btn btn-primary" onclick="addScript()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg>
-                Добавить
-            </button>
+            <button class="btn btn-primary" id="btnAddScript">➕ Добавить</button>
 
-            <div class="admin-section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
-                Удалить скрипт
-            </div>
+            <div class="admin-section-title">🗑 Удалить скрипт</div>
             <div id="adminScriptsList"></div>
 
-            <div class="admin-section-title" style="color:#10b981">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-                Добавить чит
-            </div>
+            <div class="admin-section-title" style="color:#10b981">➕ Добавить чит</div>
             <input class="admin-input" id="addCheatName" placeholder="Название чита">
             <input class="admin-input" id="addCheatLink" placeholder="Ссылка">
-            <button class="btn btn-success" onclick="addCheat()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg>
-                Добавить чит
-            </button>
+            <button class="btn btn-success" id="btnAddCheat">➕ Добавить чит</button>
 
-            <div class="admin-section-title" style="color:#ef4444">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
-                Удалить чит
-            </div>
+            <div class="admin-section-title" style="color:#ef4444">🗑 Удалить чит</div>
             <div id="adminCheatsList"></div>
 
-            <div class="admin-section-title" style="color:#f59e0b">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-                Рассылка
-            </div>
+            <div class="admin-section-title" style="color:#f59e0b">📢 Рассылка</div>
             <textarea class="admin-textarea" id="broadcastText" placeholder="Текст рассылки" style="font-family:'Inter',sans-serif"></textarea>
-            <button class="btn btn-danger" onclick="sendBroadcast()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-                Отправить рассылку
-            </button>
+            <button class="btn btn-danger" id="btnBroadcast">📢 Отправить</button>
         </div>
     </div>
 
@@ -984,19 +513,20 @@
     const ADMIN_ID = 8320214186;
 
     let allScripts = [];
+    let allCheats = [];
+    let myScriptsData = [];
 
     // ===== КАПЧА =====
-
     const captchaItems = [
-        { icon: `<svg viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="50" rx="20" ry="6" fill="#4a3728"/><path d="M20 20C20 12 26 6 32 6s12 6 12 14v6c0 8-6 14-12 14S20 48 20 40V20z" fill="#f59e0b"/><circle cx="26" cy="22" r="3" fill="#1a1a1a"/><circle cx="38" cy="22" r="3" fill="#1a1a1a"/><path d="M28 30c2 3 6 3 8 0" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M16 14c-4-2-6 0-6 4" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/><path d="M48 14c4-2 6 0 6 4" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/></svg>`, label: "Кошка", correct: true },
-        { icon: `<svg viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="52" rx="18" ry="5" fill="#5a4a3a"/><circle cx="32" cy="30" r="16" fill="#8B4513"/><circle cx="26" cy="26" r="3" fill="#1a1a1a"/><circle cx="38" cy="26" r="3" fill="#1a1a1a"/><ellipse cx="32" cy="32" rx="4" ry="3" fill="#1a1a1a"/><path d="M22 40c0 0 4 6 20 0" stroke="#1a1a1a" stroke-width="2" fill="none"/><circle cx="18" cy="18" r="8" fill="#8B4513"/><circle cx="46" cy="18" r="8" fill="#8B4513"/></svg>`, label: "Собака", correct: false },
-        { icon: `<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="36" r="18" fill="#87CEEB"/><circle cx="26" cy="32" r="3" fill="#1a1a1a"/><circle cx="38" cy="32" r="3" fill="#1a1a1a"/><path d="M28 40a6 3 0 0 0 8 0" stroke="#1a1a1a" stroke-width="2" fill="none"/><path d="M32 18v-8M28 12h8" stroke="#87CEEB" stroke-width="3" stroke-linecap="round"/><path d="M18 50l-4 8M46 50l4 8M26 54v8M38 54v8" stroke="#87CEEB" stroke-width="3" stroke-linecap="round"/></svg>`, label: "Робот", correct: false },
-        { icon: `<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="34" r="16" fill="#FFD700"/><circle cx="26" cy="30" r="2.5" fill="#1a1a1a"/><circle cx="38" cy="30" r="2.5" fill="#1a1a1a"/><path d="M26 38c3 4 9 4 12 0" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`, label: "Смайлик", correct: false },
-        { icon: `<svg viewBox="0 0 64 64" fill="none"><path d="M32 8l6 18h18l-14 10 5 18-15-11-15 11 5-18L8 26h18z" fill="#FFD700"/></svg>`, label: "Звезда", correct: false },
-        { icon: `<svg viewBox="0 0 64 64" fill="none"><path d="M32 12c-12 0-20 10-20 20 0 14 20 24 20 24s20-10 20-24c0-10-8-20-20-20z" fill="#ef4444"/></svg>`, label: "Сердце", correct: false },
-        { icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="14" y="20" width="36" height="28" rx="4" fill="#3b82f6"/><rect x="20" y="24" width="24" height="16" rx="2" fill="#93c5fd"/><rect x="22" y="44" width="8" height="4" rx="1" fill="#1e3a5f"/><rect x="34" y="44" width="8" height="4" rx="1" fill="#1e3a5f"/></svg>`, label: "Ноутбук", correct: false },
-        { icon: `<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="22" fill="#22c55e"/><path d="M22 32l6 6 14-14" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`, label: "Галочка", correct: false },
-        { icon: `<svg viewBox="0 0 64 64" fill="none"><rect x="18" y="8" width="28" height="48" rx="6" fill="#374151"/><rect x="22" y="14" width="20" height="30" rx="2" fill="#60a5fa"/><circle cx="32" cy="50" r="3" fill="#9ca3af"/></svg>`, label: "Телефон", correct: false }
+        { svg: '<svg viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="50" rx="20" ry="6" fill="#4a3728"/><path d="M20 20C20 12 26 6 32 6s12 6 12 14v6c0 8-6 14-12 14S20 48 20 40V20z" fill="#f59e0b"/><circle cx="26" cy="22" r="3" fill="#1a1a1a"/><circle cx="38" cy="22" r="3" fill="#1a1a1a"/><path d="M28 30c2 3 6 3 8 0" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/></svg>', label: "Кошка", correct: true },
+        { svg: '<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="30" r="16" fill="#8B4513"/><circle cx="26" cy="26" r="3" fill="#1a1a1a"/><circle cx="38" cy="26" r="3" fill="#1a1a1a"/></svg>', label: "Собака", correct: false },
+        { svg: '<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="36" r="18" fill="#87CEEB"/><circle cx="26" cy="32" r="3" fill="#1a1a1a"/><circle cx="38" cy="32" r="3" fill="#1a1a1a"/></svg>', label: "Робот", correct: false },
+        { svg: '<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="34" r="16" fill="#FFD700"/><circle cx="26" cy="30" r="2.5" fill="#1a1a1a"/><circle cx="38" cy="30" r="2.5" fill="#1a1a1a"/></svg>', label: "Смайл", correct: false },
+        { svg: '<svg viewBox="0 0 64 64" fill="none"><path d="M32 8l6 18h18l-14 10 5 18-15-11-15 11 5-18L8 26h18z" fill="#FFD700"/></svg>', label: "Звезда", correct: false },
+        { svg: '<svg viewBox="0 0 64 64" fill="none"><path d="M32 12c-12 0-20 10-20 20 0 14 20 24 20 24s20-10 20-24c0-10-8-20-20-20z" fill="#ef4444"/></svg>', label: "Сердце", correct: false },
+        { svg: '<svg viewBox="0 0 64 64" fill="none"><rect x="14" y="20" width="36" height="28" rx="4" fill="#3b82f6"/></svg>', label: "Ноутбук", correct: false },
+        { svg: '<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="22" fill="#22c55e"/><path d="M22 32l6 6 14-14" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>', label: "Галка", correct: false },
+        { svg: '<svg viewBox="0 0 64 64" fill="none"><rect x="18" y="8" width="28" height="48" rx="6" fill="#374151"/></svg>', label: "Телефон", correct: false }
     ];
 
     function shuffleArray(arr) {
@@ -1010,17 +540,18 @@
     function initCaptcha() {
         const grid = document.getElementById('captchaGrid');
         const items = shuffleArray([...captchaItems]).slice(0, 9);
-
         if (!items.find(i => i.correct)) {
             items[Math.floor(Math.random() * 9)] = captchaItems[0];
         }
-
-        grid.innerHTML = items.map((item, i) => `
-            <div class="captcha-item" onclick="checkCaptcha(this, ${item.correct})" style="animation-delay:${i * 0.05}s">
-                <div class="captcha-icon">${item.icon}</div>
-                <div class="captcha-label">${item.label}</div>
-            </div>
-        `).join('');
+        grid.innerHTML = '';
+        items.forEach((item, i) => {
+            const el = document.createElement('div');
+            el.className = 'captcha-item';
+            el.style.animationDelay = (i * 0.05) + 's';
+            el.innerHTML = '<div class="captcha-icon">' + item.svg + '</div><div class="captcha-label">' + item.label + '</div>';
+            el.addEventListener('click', () => checkCaptcha(el, item.correct));
+            grid.appendChild(el);
+        });
     }
 
     function checkCaptcha(el, isCorrect) {
@@ -1031,11 +562,9 @@
                 setTimeout(() => {
                     document.getElementById('captchaScreen').style.display = 'none';
                     document.getElementById('mainScreen').classList.add('show');
-
                     if (userId === ADMIN_ID) {
                         document.getElementById('adminTab').style.display = '';
                     }
-
                     loadScripts();
                 }, 400);
             }, 500);
@@ -1048,19 +577,21 @@
     initCaptcha();
 
     // ===== TABS =====
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const name = tab.dataset.tab;
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(name).classList.add('active');
+            tab.classList.add('active');
 
-    function showTab(name, tabEl) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.getElementById(name).classList.add('active');
-        tabEl.classList.add('active');
-
-        if (name === 'scripts') loadScripts();
-        if (name === 'my') loadMyScripts();
-        if (name === 'cheats') loadCheats();
-        if (name === 'guides') loadGuides();
-        if (name === 'admin') loadAdmin();
-    }
+            if (name === 'scripts') loadScripts();
+            if (name === 'my') loadMyScripts();
+            if (name === 'cheats') loadCheats();
+            if (name === 'guides') loadGuides();
+            if (name === 'admin') loadAdmin();
+        });
+    });
 
     function notify(text) {
         const n = document.getElementById('notification');
@@ -1069,85 +600,92 @@
         setTimeout(() => n.classList.remove('show'), 2500);
     }
 
-    // ===== СКРИПТЫ =====
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
 
+    // ===== ПОИСК =====
+    document.getElementById('searchInput').addEventListener('input', () => {
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        renderScripts(allScripts.filter(s => s.game.toLowerCase().includes(q)));
+    });
+
+    // ===== СКРИПТЫ =====
     async function loadScripts() {
         try {
             const res = await fetch(API + '/scripts');
             allScripts = await res.json();
             renderScripts(allScripts);
         } catch(e) {
-            document.getElementById('scriptsList').innerHTML = emptyState('folder', 'Не удалось загрузить', 'Проверьте подключение');
+            document.getElementById('scriptsList').innerHTML = emptyState('Скриптов нет', 'Скоро появятся');
         }
     }
 
-    function emptyState(icon, title, desc) {
-        const icons = {
-            folder: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>`,
-            game: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/></svg>`,
-            video: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>`
-        };
-        return `<div class="empty"><div class="empty-icon">${icons[icon]}</div><h3>${title}</h3><p>${desc}</p></div>`;
+    function emptyState(title, desc) {
+        return '<div class="empty"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><h3>' + title + '</h3><p>' + desc + '</p></div>';
     }
 
     function renderScripts(scripts) {
         const div = document.getElementById('scriptsList');
         if (!scripts.length) {
-            div.innerHTML = emptyState('folder', 'Скриптов пока нет', 'Они скоро появятся!');
+            div.innerHTML = emptyState('Скриптов нет', 'Скоро появятся');
             return;
         }
-        div.innerHTML = scripts.map((s, i) => `
-            <div class="card" onclick="viewScript('${s.game}', \`${s.script}\`)" style="animation: fadeInUp 0.5s ease ${i * 0.05}s both">
+        div.innerHTML = '';
+        scripts.forEach((s, i) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.animation = 'fadeInUp 0.5s ease ' + (i * 0.05) + 's both';
+            card.innerHTML = `
                 <div class="card-header">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
-                    </div>
-                    <div class="card-info">
-                        <div class="card-title">${s.game}</div>
-                        <div class="card-desc">Нажмите чтобы открыть</div>
-                    </div>
+                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/></svg></div>
+                    <div class="card-info"><div class="card-title">${escapeHtml(s.game)}</div><div class="card-desc">Нажмите чтобы открыть</div></div>
                     <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
                 </div>
-                <div class="card-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/></svg>
-                    Script
-                </div>
-            </div>
-        `).join('');
+                <div class="card-badge">📁 Script</div>
+            `;
+            card.addEventListener('click', () => viewScript(s));
+            div.appendChild(card);
+        });
     }
 
-    function searchScripts() {
-        const q = document.getElementById('searchInput').value.toLowerCase();
-        renderScripts(allScripts.filter(s => s.game.toLowerCase().includes(q)));
-    }
+    function viewScript(s) {
+        const div = document.getElementById('scriptsList');
+        div.innerHTML = '';
 
-    function viewScript(game, script) {
-        document.getElementById('scriptsList').innerHTML = `
-            <div class="script-view">
-                <button class="back-btn" onclick="loadScripts()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-                    Назад
-                </button>
-                <div class="card-header" style="margin-bottom:16px">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/></svg>
-                    </div>
-                    <div class="card-info">
-                        <div class="card-title">${game}</div>
-                        <div class="card-desc">Скрипт для игры</div>
-                    </div>
-                </div>
-                <div class="script-code">${script}</div>
-                <button class="btn btn-primary" onclick="saveScript('${game}')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
-                    Сохранить
-                </button>
-                <button class="btn btn-secondary" onclick="copyScript(\`${script}\`)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                    Копировать
-                </button>
-            </div>
-        `;
+        const view = document.createElement('div');
+        view.className = 'script-view';
+
+        const backBtn = document.createElement('button');
+        backBtn.className = 'back-btn';
+        backBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Назад';
+        backBtn.addEventListener('click', loadScripts);
+
+        const title = document.createElement('div');
+        title.innerHTML = `<div class="card-header" style="margin-bottom:16px"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/></svg></div><div class="card-info"><div class="card-title">${escapeHtml(s.game)}</div><div class="card-desc">Скрипт для игры</div></div></div>`;
+
+        const code = document.createElement('div');
+        code.className = 'script-code';
+        code.textContent = s.script;
+
+        const saveBtn = document.createElement('button');
+        saveBtn.className = 'btn btn-primary';
+        saveBtn.innerHTML = '💾 Сохранить';
+        saveBtn.addEventListener('click', () => saveScript(s.game));
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'btn btn-secondary';
+        copyBtn.innerHTML = '📋 Копировать';
+        copyBtn.addEventListener('click', () => copyScript(s.script));
+
+        view.appendChild(backBtn);
+        view.appendChild(title);
+        view.appendChild(code);
+        view.appendChild(saveBtn);
+        view.appendChild(copyBtn);
+        div.appendChild(view);
     }
 
     async function saveScript(game) {
@@ -1163,83 +701,152 @@
     }
 
     function copyScript(text) {
-        navigator.clipboard.writeText(text);
-        notify('📋 Скопировано!');
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+            document.execCommand('copy');
+            notify('📋 Скопировано!');
+        } catch(e) {
+            navigator.clipboard.writeText(text).then(() => notify('📋 Скопировано!')).catch(() => notify('❌ Ошибка'));
+        }
+        document.body.removeChild(ta);
     }
 
     // ===== МОИ =====
-
     async function loadMyScripts() {
         try {
             const res = await fetch(API + '/my?user_id=' + userId);
-            const scripts = await res.json();
+            myScriptsData = await res.json();
             const div = document.getElementById('myScriptsList');
-            if (!scripts.length) {
-                div.innerHTML = emptyState('folder', 'Нет сохранённых', 'Сохраните скрипт в разделе Скрипты');
+            if (!myScriptsData.length) {
+                div.innerHTML = emptyState('Нет сохранённых', 'Сохраните скрипт');
                 return;
             }
-            div.innerHTML = scripts.map((s, i) => `
-                <div class="card" onclick="viewMyScript('${s.game}', \`${s.script}\`)" style="animation: fadeInUp 0.5s ease ${i * 0.05}s both">
+            div.innerHTML = '';
+            myScriptsData.forEach((s, i) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.animation = 'fadeInUp 0.5s ease ' + (i * 0.05) + 's both';
+                card.innerHTML = `
                     <div class="card-header">
                         <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                        <div class="card-info"><div class="card-title">${s.game}</div><div class="card-desc">Сохранённый скрипт</div></div>
+                        <div class="card-info"><div class="card-title">${escapeHtml(s.game)}</div><div class="card-desc">Сохранённый скрипт</div></div>
                         <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
                     </div>
-                </div>
-            `).join('');
-        } catch(e) { document.getElementById('myScriptsList').innerHTML = emptyState('folder', 'Ошибка', 'Попробуйте позже'); }
+                `;
+                card.addEventListener('click', () => viewMyScript(s));
+                div.appendChild(card);
+            });
+        } catch(e) {
+            document.getElementById('myScriptsList').innerHTML = emptyState('Ошибка', '');
+        }
     }
 
-    function viewMyScript(game, script) {
-        document.getElementById('myScriptsList').innerHTML = `
-            <div class="script-view">
-                <button class="back-btn" onclick="loadMyScripts()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Назад</button>
-                <div class="card-title" style="margin-bottom:12px">${game}</div>
-                <div class="script-code">${script}</div>
-                <button class="btn btn-secondary" onclick="copyScript(\`${script}\`)">📋 Копировать</button>
-            </div>
-        `;
+    function viewMyScript(s) {
+        const div = document.getElementById('myScriptsList');
+        div.innerHTML = '';
+
+        const view = document.createElement('div');
+        view.className = 'script-view';
+
+        const backBtn = document.createElement('button');
+        backBtn.className = 'back-btn';
+        backBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Назад';
+        backBtn.addEventListener('click', loadMyScripts);
+
+        const title = document.createElement('div');
+        title.className = 'card-title';
+        title.style.marginBottom = '12px';
+        title.textContent = s.game;
+
+        const code = document.createElement('div');
+        code.className = 'script-code';
+        code.textContent = s.script;
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'btn btn-secondary';
+        copyBtn.innerHTML = '📋 Копировать';
+        copyBtn.addEventListener('click', () => copyScript(s.script));
+
+        view.appendChild(backBtn);
+        view.appendChild(title);
+        view.appendChild(code);
+        view.appendChild(copyBtn);
+        div.appendChild(view);
     }
 
     // ===== ЧИТЫ =====
-
     async function loadCheats() {
         try {
             const res = await fetch(API + '/cheats');
-            const cheats = await res.json();
+            allCheats = await res.json();
             const div = document.getElementById('cheatsList');
-            if (!cheats.length) { div.innerHTML = emptyState('game', 'Читов нет', 'Следите за обновлениями'); return; }
-            div.innerHTML = cheats.map((c, i) => `
-                <div class="cheat-item" style="animation-delay:${i * 0.05}s">
+            if (!allCheats.length) {
+                div.innerHTML = emptyState('Читов нет', 'Скоро появятся');
+                return;
+            }
+            div.innerHTML = '';
+            allCheats.forEach((c, i) => {
+                const item = document.createElement('div');
+                item.className = 'cheat-item';
+                item.style.animationDelay = (i * 0.05) + 's';
+                item.innerHTML = `
                     <div class="cheat-left">
                         <div class="cheat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/></svg></div>
-                        <div class="cheat-name">${c.name}</div>
+                        <div class="cheat-name">${escapeHtml(c.name)}</div>
                     </div>
-                    <button class="cheat-btn" onclick="window.open('${c.link}')">Скачать</button>
-                </div>
-            `).join('');
-        } catch(e) { document.getElementById('cheatsList').innerHTML = emptyState('game', 'Ошибка', ''); }
+                `;
+                const btn = document.createElement('button');
+                btn.className = 'cheat-btn';
+                btn.textContent = 'Скачать';
+                btn.addEventListener('click', () => downloadCheat(c));
+                item.appendChild(btn);
+                div.appendChild(item);
+            });
+        } catch(e) {
+            document.getElementById('cheatsList').innerHTML = emptyState('Ошибка', '');
+        }
+    }
+
+    async function downloadCheat(c) {
+        if (c.has_file) {
+            try {
+                await fetch(API + '/get_cheat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({user_id: userId, cheat_id: c.id})
+                });
+                notify('✅ Файл отправлен в бот!');
+            } catch(e) { notify('❌ Ошибка'); }
+        } else if (c.link) {
+            window.open(c.link, '_blank');
+        }
     }
 
     // ===== ГАЙДЫ =====
-
     async function loadGuides() {
         try {
             const res = await fetch(API + '/guides');
             const guides = await res.json();
             const div = document.getElementById('guidesList');
-            if (!guides.length) { div.innerHTML = emptyState('video', 'Гайдов нет', 'Скоро появятся'); return; }
+            if (!guides.length) {
+                div.innerHTML = emptyState('Гайдов нет', '');
+                return;
+            }
             div.innerHTML = guides.map((g, i) => `
                 <div class="guide-card" style="animation-delay:${i * 0.05}s">
                     <div class="guide-card-title">📹 Гайд #${i + 1}</div>
                     <div class="guide-card-desc">Откройте в боте для просмотра</div>
                 </div>
             `).join('');
-        } catch(e) { document.getElementById('guidesList').innerHTML = emptyState('video', 'Ошибка', ''); }
+        } catch(e) {
+            document.getElementById('guidesList').innerHTML = emptyState('Ошибка', '');
+        }
     }
 
     // ===== АДМИН =====
-
     async function loadAdmin() {
         try {
             const res = await fetch(API + '/admin/stats');
@@ -1254,66 +861,102 @@
     async function loadAdminScripts() {
         const res = await fetch(API + '/scripts');
         const scripts = await res.json();
-        document.getElementById('adminScriptsList').innerHTML = scripts.map((s, i) => `
-            <div class="list-item" style="animation-delay:${i * 0.03}s">
-                <span class="list-item-name">${s.game}</span>
-                <button class="delete-btn" onclick="deleteScript('${s.game}')">Удалить</button>
-            </div>
-        `).join('');
+        const div = document.getElementById('adminScriptsList');
+        div.innerHTML = '';
+        scripts.forEach((s, i) => {
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.style.animationDelay = (i * 0.03) + 's';
+            item.innerHTML = `<span class="list-item-name">${escapeHtml(s.game)}</span>`;
+            const btn = document.createElement('button');
+            btn.className = 'delete-btn';
+            btn.textContent = 'Удалить';
+            btn.addEventListener('click', () => deleteScript(s.game));
+            item.appendChild(btn);
+            div.appendChild(item);
+        });
     }
 
     async function loadAdminCheats() {
         const res = await fetch(API + '/cheats');
         const cheats = await res.json();
-        document.getElementById('adminCheatsList').innerHTML = cheats.map((c, i) => `
-            <div class="list-item" style="animation-delay:${i * 0.03}s">
-                <span class="list-item-name">${c.name}</span>
-                <button class="delete-btn" onclick="deleteCheat(${c.id})">Удалить</button>
-            </div>
-        `).join('');
+        const div = document.getElementById('adminCheatsList');
+        div.innerHTML = '';
+        cheats.forEach((c, i) => {
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.style.animationDelay = (i * 0.03) + 's';
+            item.innerHTML = `<span class="list-item-name">${escapeHtml(c.name)}</span>`;
+            const btn = document.createElement('button');
+            btn.className = 'delete-btn';
+            btn.textContent = 'Удалить';
+            btn.addEventListener('click', () => deleteCheat(c.id));
+            item.appendChild(btn);
+            div.appendChild(item);
+        });
     }
 
-    async function addScript() {
+    document.getElementById('btnAddScript').addEventListener('click', async () => {
         const game = document.getElementById('addGameName').value;
         const script = document.getElementById('addScriptText').value;
-        if (!game || !script) return notify('❌ Заполните все поля');
-        await fetch(API + '/admin/add_script', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({game, script, admin_id: userId}) });
+        if (!game || !script) return notify('❌ Заполните поля');
+        await fetch(API + '/admin/add_script', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({game, script, admin_id: userId})
+        });
         document.getElementById('addGameName').value = '';
         document.getElementById('addScriptText').value = '';
-        notify('✅ Скрипт добавлен!');
+        notify('✅ Добавлен!');
         loadAdmin();
-    }
+    });
 
     async function deleteScript(game) {
-        await fetch(API + '/admin/delete_script', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({game, admin_id: userId}) });
+        await fetch(API + '/admin/delete_script', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({game, admin_id: userId})
+        });
         notify('✅ Удалён!');
         loadAdmin();
     }
 
-    async function addCheat() {
+    document.getElementById('btnAddCheat').addEventListener('click', async () => {
         const name = document.getElementById('addCheatName').value;
         const link = document.getElementById('addCheatLink').value;
         if (!name || !link) return notify('❌ Заполните поля');
-        await fetch(API + '/admin/add_cheat', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({name, link, admin_id: userId}) });
+        await fetch(API + '/admin/add_cheat', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({name, link, admin_id: userId})
+        });
         document.getElementById('addCheatName').value = '';
         document.getElementById('addCheatLink').value = '';
-        notify('✅ Чит добавлен!');
+        notify('✅ Добавлен!');
         loadAdmin();
-    }
+    });
 
     async function deleteCheat(id) {
-        await fetch(API + '/admin/delete_cheat', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({id, admin_id: userId}) });
+        await fetch(API + '/admin/delete_cheat', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id, admin_id: userId})
+        });
         notify('✅ Удалён!');
         loadAdmin();
     }
 
-    async function sendBroadcast() {
+    document.getElementById('btnBroadcast').addEventListener('click', async () => {
         const text = document.getElementById('broadcastText').value;
         if (!text) return notify('❌ Введите текст');
-        await fetch(API + '/admin/broadcast', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({text, admin_id: userId}) });
+        await fetch(API + '/admin/broadcast', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({text, admin_id: userId})
+        });
         document.getElementById('broadcastText').value = '';
-        notify('✅ Рассылка отправлена!');
-    }
+        notify('✅ Отправлена!');
+    });
 </script>
 
 </body>
